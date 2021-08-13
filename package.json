@@ -17,7 +17,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,9 @@
     "solid-js": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "7.13.0",
     "@types/jest": "^27.0.1",
+    "babel-preset-solid": "^1.0.0",
     "jest": "^27.0.6",
     "rollup": "^2.28.2",
     "rollup-preset-solid": "^0.3.0",

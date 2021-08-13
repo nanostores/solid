@@ -12,6 +12,6 @@
     "jsx": "preserve",
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src", "./jest-setup.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
