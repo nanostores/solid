@@ -2,7 +2,7 @@ import { createStore } from 'nanostores'
 import { createSignal } from 'solid-js'
 import { render } from 'solid-js/web'
 import { delay } from 'nanodelay'
-import { useStore } from '../src/useStore'
+import useStore from '../src/solid-nanostores'
 
 it('renders correct in Solid', async () => {
     const events: string[] = []
