@@ -31,7 +31,7 @@ export const doubled = createDerived(bearStore, current =>
 ```
 
 ```tsx
-import useStore from 'solid-nanostores'
+import { useStore } from 'solid-nanostores'
 import { bearStore, increase } from './store'
 
 function BearCounter() {
