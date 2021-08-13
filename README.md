@@ -14,18 +14,12 @@ Use it:
 
 ```ts
 // store.ts
-interface BearStore {
-  bears: {
-      count: number
-  }
-}
-
-export const bearStore = createStore<BearStore>(() => {
-  bearStore.set({ bears: { count: 0 } })
+export const bearStore = createStore<{ count: number }>(() => {
+  bearStore.set({ count: 0 })
 })
 
-export function increase() {
-  update(bearStore, current => ({ bears: { count: current.bears.count + 1 } }))
+export const increase = () => {
+  update(bearStore, prev => ({ count: prev.count + 1 }))
 }
 ```
 
