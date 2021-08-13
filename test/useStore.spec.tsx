@@ -6,6 +6,7 @@ import { useStore } from '../src/useStore'
 
 it('renders correct in Solid', async () => {
     const events: string[] = []
+    let renders = 0
     
     const letterStore = createStore<{ letter: string }>(() => {
         events.push('constructor')
@@ -20,7 +21,7 @@ it('renders correct in Solid', async () => {
 
     const dispose = render(() => {
         const store = useStore(letterStore)
-
+        renders += 1
         return (
             <>
                 { show() && <div data-testid="test1">{store.letter}</div> }
@@ -30,13 +31,17 @@ it('renders correct in Solid', async () => {
     
     expect(events).toEqual(['constructor'])
     expect(div.querySelector('[data-testid="test1"]').textContent).toBe('a')
+    expect(renders).toEqual(1)
 
     letterStore.set({ letter: 'b' })
     letterStore.set({ letter: 'c' })
 
     expect(div.querySelector('[data-testid="test1"]').textContent).toBe('c')
+    expect(renders).toEqual(1)
+
     setShow(false)
     expect(div.querySelector('[data-testid="test1"]')).toBeNull()
+    expect(renders).toEqual(1)
     dispose()
     await delay(1000)
     
