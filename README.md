@@ -37,3 +37,5 @@ function Controls() {
   return <button onClick={increase}>one up</button>
 }
 ```
+
+For more information about async operations and server-side rendering, please visite [nanostores' docs](https://github.com/nanostores/nanostores).
