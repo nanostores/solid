@@ -32,6 +32,9 @@
     "nanostores": "^0.4.3",
     "solid-js": "^1.0.0"
   },
+  "peerDependencies": {
+    "nanostores": "^0.4.3"
+  },
   "devDependencies": {
     "@babel/preset-typescript": "7.13.0",
     "@types/jest": "^27.0.1",
