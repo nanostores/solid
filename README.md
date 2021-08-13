@@ -1,6 +1,6 @@
 # solid-nanostores
 
-{{ desc_of_lib }}
+Global state management in Solid using nanostores.
 
 ## Quick start
 
@@ -38,4 +38,4 @@ function Controls() {
 }
 ```
 
-For more information about async operations and server-side rendering, please visite [nanostores' docs](https://github.com/nanostores/nanostores).
+For more information about async operations and server-side rendering, please visit [nanostores' docs](https://github.com/nanostores/nanostores).
