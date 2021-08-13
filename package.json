@@ -1,7 +1,7 @@
 {
   "version": "0.0.1",
   "name": "solid-nanostores",
-  "description": "Tiny state manager for Solid.",
+  "description": "Global state management in Solid using nanostores.",
   "type": "module",
   "files": [
     "dist"
