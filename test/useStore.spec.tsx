@@ -1,10 +1,10 @@
 import { createStore } from 'nanostores'
-import { createSignal, Show } from 'solid-js'
+import { createSignal } from 'solid-js'
 import { render } from 'solid-js/web'
 import { delay } from 'nanodelay'
 import { useStore } from '../src/useStore'
 
-it('renders simple store', async () => {
+it('renders correct in Solid', async () => {
     const events: string[] = []
     
     const letterStore = createStore<{ letter: string }>(() => {
@@ -22,9 +22,9 @@ it('renders simple store', async () => {
         const store = useStore(letterStore)
 
         return (
-            <div>
+            <>
                 { show() && <div data-testid="test1">{store.letter}</div> }
-            </div>
+            </>
         )
     }, div)
     
