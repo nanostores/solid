@@ -44,7 +44,7 @@ function Controls() {
 }
 ```
 
-For more information about async operations and server-side rendering, please visit [nanostores' docs](https://github.com/nanostores/nanostores).
+For more information about async operations and [server-side rendering](https://github.com/nanostores/nanostores#server-side-rendering), please visit [nanostores' docs](https://github.com/nanostores/nanostores).
 
 ## License
 

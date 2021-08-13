@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "pnpm build",
+    "prepublishOnly": "yarn build",
     "test": "jest"
   },
   "repository": {
