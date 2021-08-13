@@ -28,6 +28,7 @@
   "license": "MIT",
   "homepage": "https://github.com/wobsoriano/solid-nanostores#readme",
   "dependencies": {
+    "nanostores": "^0.4.3",
     "solid-js": "^1.0.0"
   },
   "devDependencies": {
