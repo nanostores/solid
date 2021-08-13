@@ -14,17 +14,23 @@ Use it:
 
 ```ts
 // store.ts
+import { createStore, createDerived, update } from 'nanostores'
+
 export const bearStore = createStore<{ count: number }>(() => {
   bearStore.set({ count: 0 })
 })
 
 export const increase = () => {
-  update(bearStore, prev => ({ count: prev.count + 1 }))
+  update(bearStore, current => ({ count: current.count + 1 }))
 }
+
+// Use derived stores to create chains of reactive computations.
+export const doubled = createDerived(bearStore, current =>
+  current.count * 2
+)
 ```
 
 ```tsx
-import { createStore, update } from 'nanostores'
 import { useStore } from 'solid-nanostores'
 import { bearStore, increase } from './store'
 
