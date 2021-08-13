@@ -1,6 +1,7 @@
 import { createStore } from 'nanostores'
 import { createSignal, Show } from 'solid-js'
 import { render } from 'solid-js/web'
+import { delay } from 'nanodelay'
 import { useStore } from '../src/useStore'
 
 it('renders simple store', async () => {
@@ -36,10 +37,8 @@ it('renders simple store', async () => {
     expect(div.querySelector('[data-testid="test1"]').textContent).toBe('c')
     setShow(false)
     expect(div.querySelector('[data-testid="test1"]')).toBeNull()
-
     dispose()
+    await delay(1000)
     
-    setTimeout(() => {
-        expect(events).toEqual(['constructor', 'destroy'])
-    }, 0)
+    expect(events).toEqual(['constructor', 'destroy'])
 })

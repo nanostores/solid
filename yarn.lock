@@ -2790,6 +2790,11 @@ ms@2.1.2:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+nanodelay@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/nanodelay/-/nanodelay-2.0.0.tgz#e9c676d085b1dd2813da21ef377f3c0783657537"
+  integrity sha512-kwm0xaJQpmkxl9RLg83kMmqqZ9BoL51nvWEF8Grd9xChHU18utE9NHU1Nzx7OiC92M1iW5JCl4xxxbXs7P3Ujg==
+
 nanostores@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.4.3.tgz#fc206a5c80e1d05ab42631e9d3358bcba3664e0c"

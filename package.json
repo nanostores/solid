@@ -37,6 +37,7 @@
     "@types/jest": "^27.0.1",
     "babel-preset-solid": "^1.0.0",
     "jest": "^27.0.6",
+    "nanodelay": "^2.0.0",
     "rollup": "^2.28.2",
     "rollup-preset-solid": "^0.3.0",
     "solid-jest": "^0.2.0",
