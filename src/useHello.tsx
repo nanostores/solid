@@ -1,7 +1,3 @@
-import { createSignal } from 'solid-js';
+import { createStore, reconcile } from 'solid-js/store';
+import { onCleanup } from 'solid-js';
 
-export function useHello() {
-  const [hello, setHello] = createSignal('');
-
-  return [hello, { setHello }] as const;
-}
