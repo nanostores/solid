@@ -36,7 +36,7 @@ import { bearStore, increase } from './store'
 
 function BearCounter() {
   const state = useStore(bearStore)
-  return <h1>{state.bears.count} around here ...</h1>
+  return <h1>{state.count} around here ...</h1>
 }
 
 function Controls() {
