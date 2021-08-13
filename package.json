@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "name": "solid-nanostores",
   "description": "Global state management in Solid using nanostores.",
   "type": "module",
@@ -11,7 +11,7 @@
   "types": "dist/types/solid-nanostores.d.ts",
   "exports": {
     ".": {
-      "solid": "./dist/source/solid-nanostores.jsx",
+      "solid": "./dist/source/solid-nanostores.js",
       "default": "./dist/esm/solid-nanostores.js"
     }
   },
