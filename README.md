@@ -1,6 +1,6 @@
 # solid-nanostores
 
-Global state management in Solid using nanostores.
+Global state management in Solid using [Nano Stores](https://github.com/nanostores/nanostores).
 
 ## Quick start
 
