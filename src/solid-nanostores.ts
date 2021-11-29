@@ -1,9 +1,9 @@
-import { createStore, reconcile } from 'solid-js/store';
+import { createStore, reconcile, StoreNode } from 'solid-js/store';
 import { onCleanup } from 'solid-js';
-import { ReadableStore, getValue } from 'nanostores';
+import { ReadableAtom } from 'nanostores';
 
-export function useStore<T extends any>(store: ReadableStore<T>) {
-  const [state, setState] = createStore(getValue(store));
+export function useStore<T extends StoreNode>(store: ReadableAtom<T>) {
+  const [state, setState] = createStore(store.get());
   const unsubscribe = store.subscribe((newState) => {
     setState(reconcile(newState))
   });

@@ -1,20 +1,13 @@
-import { createStore } from 'nanostores'
+import { atom } from 'nanostores'
 import { createSignal } from 'solid-js'
 import { render } from 'solid-js/web'
 import { delay } from 'nanodelay'
 import { useStore } from '../src/solid-nanostores'
 
 it('renders correct in Solid', async () => {
-    const events: string[] = []
     let renders = 0
     
-    const letterStore = createStore<{ letter: string }>(() => {
-        events.push('constructor')
-        letterStore.set({ letter: 'a' })
-        return () => {
-            events.push('destroy')
-        }
-    })
+    const letterStore = atom<{ letter: string }>({ letter: 'a' })
 
     const div = document.createElement('div')
     const [show, setShow] = createSignal(true)
@@ -29,7 +22,6 @@ it('renders correct in Solid', async () => {
         )
     }, div)
     
-    expect(events).toEqual(['constructor'])
     expect(div.querySelector('[data-testid="test"]').textContent).toBe('a')
     expect(renders).toEqual(1)
 
@@ -44,6 +36,4 @@ it('renders correct in Solid', async () => {
     expect(renders).toEqual(1)
     dispose()
     await delay(1000)
-    
-    expect(events).toEqual(['constructor', 'destroy'])
 })
