@@ -1,6 +1,7 @@
 node_modules
 types
 dist
+.idea
 
 .yarn/*
 !.yarn/cache

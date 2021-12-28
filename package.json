@@ -4,19 +4,18 @@
   "description": "Global state management in Solid using nanostores.",
   "type": "module",
   "files": [
-    "dist"
+    "src"
   ],
-  "main": "dist/esm/solid-nanostores.js",
-  "module": "dist/esm/solid-nanostores.js",
-  "types": "dist/types/solid-nanostores.d.ts",
+  "module": "src/index.js",
+  "types": "src/index.d.ts",
   "exports": {
     ".": {
-      "solid": "./dist/source/solid-nanostores.js",
-      "default": "./dist/esm/solid-nanostores.js"
+      "solid": "src/index.js",
+      "default": "src/index.js"
     }
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": ":",
     "prepublishOnly": "yarn build",
     "test": "jest"
   },
