@@ -7,40 +7,40 @@ Global state management in Solid using [Nano Stores](https://github.com/nanostor
 Install it:
 
 ```bash
-yarn add solid-nanostores
+pnpm add nanostores solid-nanostores # or npm or yarn
 ```
 
 Use it:
 
 ```ts
 // store.ts
-import { createStore, createDerived, update } from 'nanostores'
+import { createDerived, createStore, update } from 'nanostores';
 
 export const bearStore = createStore<{ count: number }>(() => {
-  bearStore.set({ count: 0 })
-})
+  bearStore.set({ count: 0 });
+});
 
 export const increase = () => {
-  update(bearStore, current => ({ count: current.count + 1 }))
-}
+  update(bearStore, current => ({ count: current.count + 1 }));
+};
 
 // Use derived stores to create chains of reactive computations.
 export const doubled = createDerived(bearStore, current =>
-  current.count * 2
-)
+  current.count * 2,
+);
 ```
 
 ```tsx
-import { useStore } from 'solid-nanostores'
-import { bearStore, increase } from './store'
+import { useStore } from 'solid-nanostores';
+import { bearStore, increase } from './store';
 
 function BearCounter() {
-  const state = useStore(bearStore)
-  return <h1>{state.count} around here ...</h1>
+  const state = useStore(bearStore);
+  return <h1>{state.count} around here ...</h1>;
 }
 
 function Controls() {
-  return <button onClick={increase}>one up</button>
+  return <button onClick={increase}>one up</button>;
 }
 ```
 
@@ -48,4 +48,4 @@ For more information about async operations and [server-side rendering](https://
 
 ## License
 
-MIT License © 2021 [Robert Soriano](https://github.com/wobsoriano)
+MIT
