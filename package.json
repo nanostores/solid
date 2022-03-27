@@ -1,6 +1,6 @@
 {
   "name": "solid-nanostores",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Global state management in Solid using nanostores.",
   "keywords": [
     "solid",
