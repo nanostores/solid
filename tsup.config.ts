@@ -1,9 +1,9 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ['src/index.ts'],
   clean: true,
-  format: ["cjs", "esm"],
-  external: ["zustand/vanilla"],
+  format: ['cjs', 'esm'],
+  external: ['solid-js/store'],
   dts: true,
 });
