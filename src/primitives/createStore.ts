@@ -1,13 +1,37 @@
-import type { Store as SolidStore } from 'solid-js/store';
-import type { Store, WritableStore } from 'nanostores';
-import { reconcile, createStore as solidCreateStore } from 'solid-js/store';
-import { onCleanup } from 'solid-js';
+import type { WritableStore } from 'nanostores';
+import { createStore as createStoreImpl, reconcile } from 'solid-js/store';
+import type { Accessor } from 'solid-js';
+import { createMemo, createSignal, onCleanup } from 'solid-js';
+import { isPrimitive } from '../util';
 
-export function createStore<T>(store: Store<T>): [
-  SolidStore<T>, (newValue: T) => void,
+function createPrimitiveStore<T>(store: WritableStore<T>): [
+  Accessor<T>, (newValue: T) => void,
 ] {
   const initialValue = store.get();
-  const [state, setState] = solidCreateStore(initialValue);
+  const [state, setState] = createSignal(initialValue);
+
+  const unsubscribe = store.subscribe((value) => {
+    // @ts-expect-error: fix later
+    setState(value);
+  });
+
+  onCleanup(() => unsubscribe());
+
+  const updateValue = (newValue: T) => {
+    store.set(newValue);
+  };
+
+  return [state, updateValue];
+}
+
+export function createStore<T>(store: WritableStore<T>): [
+  Accessor<T>, (newValue: T) => void,
+] {
+  if (isPrimitive(store.get()))
+    return createPrimitiveStore(store);
+
+  const initialValue = store.get();
+  const [state, setState] = createStoreImpl(initialValue);
 
   const unsubscribe = store.subscribe((value) => {
     const newState = reconcile(value);
@@ -17,8 +41,10 @@ export function createStore<T>(store: Store<T>): [
   onCleanup(() => unsubscribe());
 
   const updateValue = (newValue: T) => {
-    (store as WritableStore<T>).set(newValue);
+    store.set(newValue);
   };
 
-  return [state, updateValue];
+  const memoizedStore = createMemo(() => state);
+
+  return [memoizedStore, updateValue];
 }
