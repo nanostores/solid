@@ -28,29 +28,27 @@ Use it:
 
 ```ts
 // store.ts
-import { createDerived, createStore, update } from 'nanostores';
+import { action, atom, computed } from 'nanostores';
 
-export const bearStore = createStore<{ count: number }>(() => {
-  bearStore.set({ count: 0 });
+export const bearStore = atom({ value: 0 });
+
+export const increase = action(bearStore, 'increase', (store) => {
+  store.set({ value: store.get().value + 1 });
 });
 
-export const increase = () => {
-  update(bearStore, current => ({ count: current.count + 1 }));
-};
-
-// Use derived stores to create chains of reactive computations.
-export const doubled = createDerived(bearStore, current =>
+// Use computed stores to create chains of reactive computations.
+export const doubled = computed(bearStore, current =>
   current.count * 2,
 );
 ```
 
 ```tsx
-import { useStore } from 'solid-nanostores';
+import { createStore } from 'solid-nanostores';
 import { bearStore, increase } from './store';
 
 function BearCounter() {
-  const state = useStore(bearStore);
-  return <h1>{state.count} around here ...</h1>;
+  const count = createStore(bearStore);
+  return <h1>{count().value} around here ...</h1>;
 }
 
 function Controls() {
