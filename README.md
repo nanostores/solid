@@ -12,7 +12,6 @@ with many atomic tree-shakable stores.
 * **Tree Shakable.** The chunk contains only stores used by components
   in the chunk.
 * **Helpers.** Designed to keep code clean and save a few keystrokes.
-* **Devtools.** Plugin with full support of [Vue Devtools].
 * Was designed to move logic from components to stores.
 * It has good **TypeScript** support.
 
