@@ -1,9 +1,10 @@
 import type { Store } from 'nanostores';
 import { createStore as createStoreImpl, reconcile } from 'solid-js/store';
+import type { Accessor } from 'solid-js';
 import { createMemo, createSignal, onCleanup } from 'solid-js';
 import { isPrimitive } from '../util';
 
-function createPrimitiveStore<T>(store: Store<T>) {
+function createPrimitiveStore<T>(store: Store<T>): Accessor<T> {
   const initialValue = store.get();
   const [state, setState] = createSignal(initialValue);
 
@@ -17,7 +18,7 @@ function createPrimitiveStore<T>(store: Store<T>) {
   return state;
 }
 
-export function createStore<T>(store: Store<T>) {
+export function createStore<T>(store: Store<T>): Accessor<T> {
   if (isPrimitive(store.get()))
     return createPrimitiveStore(store);
 
