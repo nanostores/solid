@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
-    "declaration": true,
-    "moduleResolution": "node",
-    "declarationDir": "./types",
-    "emitDeclarationOnly": true,
     "strict": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "lib": ["dom", "esnext", "dom.iterable"],
     "jsx": "preserve",
-    "resolveJsonModule": true
+    "jsxImportSource": "solid-js"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": ["./src"]
 }

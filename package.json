@@ -1,51 +1,74 @@
 {
-  "version": "0.0.7",
   "name": "solid-nanostores",
+  "version": "0.0.7",
   "description": "Global state management in Solid using nanostores.",
-  "type": "module",
-  "files": [
-    "src"
+  "keywords": [
+    "solid",
+    "nanostores",
+    "state management"
   ],
-  "module": "src/index.js",
-  "types": "src/index.d.ts",
-  "exports": {
-    ".": {
-      "solid": "src/index.js",
-      "default": "src/index.js"
-    }
-  },
-  "scripts": {
-    "build": ":",
-    "prepublishOnly": "yarn build",
-    "test": "jest"
-  },
+  "license": "MIT",
+  "author": "Robert Soriano <sorianorobertc@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wobsoriano/solid-nanostores.git"
+    "url": "git+https://github.com/nanostores/solid.git"
   },
-  "keywords": [],
-  "author": "wobsoriano",
-  "license": "MIT",
-  "homepage": "https://github.com/wobsoriano/solid-nanostores#readme",
-  "dependencies": {
-    "nanostores": "^0.5.6",
-    "solid-js": "^1.2.5"
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "lint": "eslint --ext=js,ts,jsx,tsx .",
+    "lint:fix": "eslint --ext=js,ts,jsx,tsx . --fix",
+    "prepublishOnly": "pnpm run build"
+  },
+  "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
     "nanostores": "^0.5.6"
   },
-  "devDependencies": {
-    "@babel/preset-typescript": "7.16.0",
-    "@types/jest": "^27.0.3",
-    "babel-preset-solid": "^1.2.5",
-    "jest": "^27.3.1",
-    "nanodelay": "^2.0.2",
-    "rollup": "^2.60.1",
-    "rollup-preset-solid": "^1.0.1",
-    "solid-jest": "^0.2.0",
-    "typescript": "^4.5.2"
+  "dependencies": {
+    "nanostores": "^0.5.12",
+    "solid-js": "^1.3.13"
   },
-  "jest": {
-    "preset": "solid-jest/preset/browser"
+  "devDependencies": {
+    "@antfu/eslint-config-ts": "^0.18.9",
+    "@typescript-eslint/parser": "^5.16.0",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.12.0",
+    "eslint-plugin-solid": "^0.4.5",
+    "jsdom": "^19.0.0",
+    "tsup": "^5.12.1",
+    "typescript": "^4.5.2",
+    "vite-plugin-solid": "^2.2.6",
+    "vitest": "^0.7.11"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "solid"
+    ],
+    "extends": [
+      "plugin:solid/typescript",
+      "@antfu/eslint-config-ts"
+    ],
+    "rules": {
+      "semi": [
+        2,
+        "always"
+      ],
+      "@typescript-eslint/semi": [
+        2,
+        "always"
+      ]
+    }
   }
 }
