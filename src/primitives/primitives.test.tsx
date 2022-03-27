@@ -3,18 +3,18 @@ import { cleanup, render, screen } from 'solid-testing-library';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { useSignal, useStore } from '../index';
+import { createSignal, createStore } from '../index';
 
 describe('test primitives', () => {
   beforeEach(() => {
     cleanup();
   });
 
-  test('useStore', async() => {
+  test('createStore', async() => {
     const counter = atom({ value: 0 });
 
     const App = () => {
-      const [state, setState] = useStore(counter);
+      const [state, setState] = createStore(counter);
 
       const inc = () => setState({ value: state.value + 1 });
       const dec = () => setState({ value: state.value - 1 });
@@ -41,11 +41,11 @@ describe('test primitives', () => {
     expect((await screen.findByTestId('count')).textContent).toBe('1');
   });
 
-  test('useSignal', async() => {
+  test('createSignal', async() => {
     const counter = atom(0);
 
     const App = () => {
-      const [count, setCount] = useSignal(counter);
+      const [count, setCount] = createSignal(counter);
 
       const inc = () => {
         setCount(count() + 1);

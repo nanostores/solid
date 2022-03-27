@@ -1,3 +1,2 @@
-export { useStore } from './primitives/useStore';
-export { useSignal } from './primitives/useSignal';
-export { useMemo } from './primitives/useMemo';
+export { createStore } from './primitives/createStore';
+export { createSignal } from './primitives/createSignal';
