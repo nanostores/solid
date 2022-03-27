@@ -1,15 +1,15 @@
-import type { Store } from 'solid-js/store';
+import type { Store as SolidStore } from 'solid-js/store';
+import type { Store, WritableStore } from 'nanostores';
 import { reconcile, createStore as solidCreateStore } from 'solid-js/store';
 import { onCleanup } from 'solid-js';
-import type { WritableAtom } from 'nanostores';
 
-export function createStore<T>(atom: WritableAtom<T>): [
-  Store<T>, (newValue: T) => void,
+export function createStore<T>(store: Store<T>): [
+  SolidStore<T>, (newValue: T) => void,
 ] {
-  const initialValue = atom.get();
+  const initialValue = store.get();
   const [state, setState] = solidCreateStore(initialValue);
 
-  const unsubscribe = atom.subscribe((value) => {
+  const unsubscribe = store.subscribe((value) => {
     const newState = reconcile(value);
     setState(newState);
   });
@@ -17,7 +17,7 @@ export function createStore<T>(atom: WritableAtom<T>): [
   onCleanup(() => unsubscribe());
 
   const updateValue = (newValue: T) => {
-    atom.set(newValue);
+    (store as WritableStore<T>).set(newValue);
   };
 
   return [state, updateValue];
