@@ -12,19 +12,19 @@ const increase = action(counterStore, 'increase', (store) => {
 const decrease = action(counterStore, 'decrease', (store) => {
   store.set({ value: store.get().value - 1 });
 });
-const doubled = computed(counterStore, current =>
+const doubledCounterStore = computed(counterStore, current =>
   current.value * 2,
 );
 
 test('render correct in solid', async() => {
   const App = () => {
     const counter = createStore(counterStore);
-    const doubledCounter = createStore(doubled);
+    const doubled = createStore(doubledCounterStore);
 
     return (
       <>
         <div data-testid="count">{counter().value}</div>
-        <div data-testid="doubled">{doubledCounter()}</div>
+        <div data-testid="doubled">{doubled()}</div>
         <button data-testid="inc" onClick={increase}>+</button>
         <button data-testid="dec" onClick={decrease}>-</button>
       </>

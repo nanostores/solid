@@ -55,7 +55,30 @@ function Controls() {
 }
 ```
 
-For more information about async operations and [server-side rendering](https://github.com/nanostores/nanostores#server-side-rendering), please visit [nanostores' docs](https://github.com/nanostores/nanostores).
+## Server-Side Rendering
+
+Nano Stores support SSR. Use standard strategies.
+
+```ts
+import { isServer } from 'solid-js/web';
+
+if (isServer) {
+  settings.set(initialSettings);
+  router.open(renderingPageURL);
+}
+```
+
+You can wait for async operations (for instance, data loading via isomorphic `fetch()`) before rendering the page:
+
+```tsx
+import { renderToString } from 'solid-js/web';
+import { allTasks } from 'nanostores';
+
+post.listen(() => {}); // Move store to active mode to start data loading
+await allTasks();
+
+const html = renderToString(<App />);
+```
 
 ## License
 
