@@ -1,12 +1,9 @@
-import type { WritableStore } from 'nanostores';
+import type { Store } from 'nanostores';
 import { createStore as createStoreImpl, reconcile } from 'solid-js/store';
-import type { Accessor } from 'solid-js';
 import { createMemo, createSignal, onCleanup } from 'solid-js';
 import { isPrimitive } from '../util';
 
-function createPrimitiveStore<T>(store: WritableStore<T>): [
-  Accessor<T>, (newValue: T) => void,
-] {
+function createPrimitiveStore<T>(store: Store<T>) {
   const initialValue = store.get();
   const [state, setState] = createSignal(initialValue);
 
@@ -17,16 +14,10 @@ function createPrimitiveStore<T>(store: WritableStore<T>): [
 
   onCleanup(() => unsubscribe());
 
-  const updateValue = (newValue: T) => {
-    store.set(newValue);
-  };
-
-  return [state, updateValue];
+  return state;
 }
 
-export function createStore<T>(store: WritableStore<T>): [
-  Accessor<T>, (newValue: T) => void,
-] {
+export function createStore<T>(store: Store<T>) {
   if (isPrimitive(store.get()))
     return createPrimitiveStore(store);
 
@@ -40,11 +31,5 @@ export function createStore<T>(store: WritableStore<T>): [
 
   onCleanup(() => unsubscribe());
 
-  const updateValue = (newValue: T) => {
-    store.set(newValue);
-  };
-
-  const memoizedStore = createMemo(() => state);
-
-  return [memoizedStore, updateValue];
+  return createMemo(() => state);
 }

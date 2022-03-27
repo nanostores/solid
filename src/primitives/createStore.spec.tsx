@@ -1,78 +1,43 @@
 import { atom } from 'nanostores';
-import { cleanup, render, screen } from 'solid-testing-library';
+import { render, screen } from 'solid-testing-library';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, test } from 'vitest';
+import { expect, test } from 'vitest';
 
 import { createStore } from '../index';
 
-describe('createStore', () => {
-  beforeEach(() => {
-    cleanup();
-  });
+test('render correct in solid', async() => {
+  const counterStore = atom({ value: 0 });
 
-  test('object', async() => {
-    const counter = atom({ value: 0 });
+  const App = () => {
+    const counter = createStore(counterStore);
 
-    const App = () => {
-      const [state, setState] = createStore(counter);
-
-      const inc = () => setState({ value: state().value + 1 });
-      const dec = () => setState({ value: state().value - 1 });
-
-      return (
-        <>
-          <div data-testid="count">{state().value}</div>
-          <button data-testid="inc" onClick={inc}>+</button>
-          <button data-testid="dec" onClick={dec}>-</button>
-        </>
-      );
+    const inc = () => {
+      counterStore.set({ value: counterStore.get().value + 1 });
+    };
+    const dec = () => {
+      counterStore.set({ value: counterStore.get().value - 1 });
     };
 
-    render(() => <App />);
+    return (
+      <>
+        <div data-testid="count">{counter().value}</div>
+        <button data-testid="inc" onClick={inc}>+</button>
+        <button data-testid="dec" onClick={dec}>-</button>
+      </>
+    );
+  };
 
-    const increment = await screen.findByTestId('inc');
-    const decrement = await screen.findByTestId('dec');
+  const { unmount } = render(() => <App />);
 
-    userEvent.click(increment);
-    userEvent.click(increment);
+  const increment = await screen.findByTestId('inc');
+  const decrement = await screen.findByTestId('dec');
 
-    expect((await screen.findByTestId('count')).textContent).toBe('2');
-    userEvent.click(decrement);
-    expect((await screen.findByTestId('count')).textContent).toBe('1');
-  });
+  userEvent.click(increment);
+  userEvent.click(increment);
 
-  test('primtive', async() => {
-    const counter = atom(0);
+  expect((await screen.findByTestId('count')).textContent).toBe('2');
+  userEvent.click(decrement);
+  expect((await screen.findByTestId('count')).textContent).toBe('1');
 
-    const App = () => {
-      const [count, setCount] = createStore(counter);
-
-      const inc = () => {
-        setCount(count() + 1);
-      };
-      const dec = () => {
-        setCount(count() - 1);
-      };
-
-      return (
-        <>
-          <div data-testid="count">{count()}</div>
-          <button data-testid="inc" onClick={inc}>+</button>
-          <button data-testid="dec" onClick={dec}>-</button>
-        </>
-      );
-    };
-
-    render(() => <App />);
-
-    const increment = await screen.findByTestId('inc');
-    const decrement = await screen.findByTestId('dec');
-
-    userEvent.click(increment);
-    userEvent.click(increment);
-
-    expect((await screen.findByTestId('count')).textContent).toBe('2');
-    userEvent.click(decrement);
-    expect((await screen.findByTestId('count')).textContent).toBe('1');
-  });
+  unmount();
 });
