@@ -1,6 +1,6 @@
+import type { Store } from 'solid-js/store';
 import { createStore, reconcile } from 'solid-js/store';
-import type { Accessor } from 'solid-js';
-import { createMemo, onCleanup } from 'solid-js';
+import { onCleanup } from 'solid-js';
 import type { WritableAtom } from 'nanostores';
 
 export function useStore<T>(atom: WritableAtom<T>) {
@@ -14,13 +14,11 @@ export function useStore<T>(atom: WritableAtom<T>) {
 
   onCleanup(() => unsubscribe());
 
-  const signal = createMemo(() => state);
-
   const updateValue = (newValue: T) => {
     atom.set(newValue);
   };
 
-  return [signal, updateValue] as [
-    Accessor<T>, (newValue: T) => void,
+  return [state, updateValue] as [
+    Store<T>, (newValue: T) => void,
   ];
 }

@@ -17,7 +17,7 @@ test('renders correct in Solid', async() => {
     renders += 1;
     return (
       <>
-        { show() && <div data-testid="test">{store().letter}</div> }
+        { show() && <div data-testid="test">{store.letter}</div> }
       </>
     );
   }, div);
