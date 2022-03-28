@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "description": "Global state management in Solid using nanostores.",
   "keywords": [
-    "solid",
-    "nanostores",
-    "state management"
+    "store",
+    "state",
+    "state manager",
+    "solid"
   ],
   "license": "MIT",
   "author": "Robert Soriano <sorianorobertc@gmail.com>",
