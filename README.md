@@ -20,7 +20,7 @@ with many atomic tree-shakable stores.
 Install it:
 
 ```bash
-pnpm add nanostores solid-nanostores # or npm or yarn
+pnpm add nanostores @nanostores/solid # or npm or yarn
 ```
 
 Use it:
@@ -42,7 +42,7 @@ export const doubled = computed(bearStore, current =>
 ```
 
 ```tsx
-import { createStore } from 'solid-nanostores';
+import { createStore } from '@nanostores/solid';
 import { bearStore, increase } from './store';
 
 function BearCounter() {

@@ -28,7 +28,7 @@
     "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "release": "bumpp --commit --push --tag && pnpm publish",
+    "release": "bumpp --commit --tag --push && npm publish",
     "lint": "eslint --ext=js,ts,jsx,tsx .",
     "lint:fix": "eslint --ext=js,ts,jsx,tsx . --fix",
     "prepublishOnly": "pnpm run build"
