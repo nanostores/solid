@@ -2,6 +2,9 @@
   "name": "@nanostores/solid",
   "version": "0.1.2",
   "description": "Global state management in Solid using nanostores.",
+  "publishConfig": {
+    "directory": "package"
+  },
   "keywords": [
     "store",
     "state",
@@ -31,7 +34,8 @@
     "release": "bumpp --commit --tag --push && pnpm publish",
     "lint": "eslint --ext=js,ts,jsx,tsx .",
     "lint:fix": "eslint --ext=js,ts,jsx,tsx . --fix",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "rimraf ./package && pnpm run build && clean-publish",
+    "postpublish": "rimraf ./package"
   },
   "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
@@ -46,6 +50,7 @@
     "@testing-library/dom": "^8.12.0",
     "@testing-library/user-event": "^13.5.0",
     "bumpp": "^7.1.1",
+    "clean-publish": "^4.0.0",
     "eslint": "^8.12.0",
     "eslint-plugin-solid": "^0.4.5",
     "jsdom": "^19.0.0",
@@ -73,5 +78,9 @@
         "always"
       ]
     }
+  },
+  "clean-publish": {
+    "withoutPublish": true,
+    "tempDir": "package"
   }
 }
