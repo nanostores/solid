@@ -1,15 +1,17 @@
-import type { Store } from 'nanostores';
+import type { Store, StoreValue } from 'nanostores';
 import { createStore as createStoreImpl, reconcile } from 'solid-js/store';
 import type { Accessor } from 'solid-js';
 import { createMemo, createSignal, onCleanup } from 'solid-js';
 import { isPrimitive } from './util';
 
-function createPrimitiveStore<T>(store: Store<T>): Accessor<T> {
+function createPrimitiveStore<
+  SomeStore extends Store,
+  Value extends StoreValue<SomeStore>,
+>(store: SomeStore): Accessor<Value> {
   const initialValue = store.get();
   const [state, setState] = createSignal(initialValue);
 
   const unsubscribe = store.subscribe((value) => {
-    // @ts-expect-error: fix later
     setState(value);
   });
 
@@ -18,7 +20,10 @@ function createPrimitiveStore<T>(store: Store<T>): Accessor<T> {
   return state;
 }
 
-export function useStore<T>(store: Store<T>): Accessor<T> {
+export function useStore<
+  SomeStore extends Store,
+  Value extends StoreValue<SomeStore>,
+>(store: SomeStore): Accessor<Value> {
   if (isPrimitive(store.get()))
     return createPrimitiveStore(store);
 
