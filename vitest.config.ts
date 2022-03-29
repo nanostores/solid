@@ -12,6 +12,7 @@ export default defineConfig({
     },
     threads: false,
     isolate: false,
+    setupFiles: ['./vitest.setup.ts'],
   },
   plugins: [solid()],
   resolve: {
