@@ -1,4 +1,4 @@
-import { STORE_UNMOUNT_DELAY, atom, map, mapTemplate, onMount } from 'nanostores';
+import { STORE_UNMOUNT_DELAY, atom, map, mapTemplate, onMount as onMountStore } from 'nanostores';
 import { cleanup, render, screen } from 'solid-testing-library';
 import { afterEach, expect, it } from 'vitest';
 import { delay } from 'nanodelay';
@@ -16,7 +16,7 @@ it('renders simple store', async() => {
 
   const letterStore = atom<string>();
 
-  onMount(letterStore, () => {
+  onMountStore(letterStore, () => {
     events.push('constructor');
     letterStore.set('a');
     return () => {
@@ -84,7 +84,7 @@ it('renders map store', async() => {
 
   const nameStore = map<{ first: string; last: string }>();
 
-  onMount(nameStore, () => {
+  onMountStore(nameStore, () => {
     events.push('constructor');
     nameStore.setKey('first', 'Aleister');
     nameStore.setKey('last', 'Crowley');
@@ -119,7 +119,7 @@ it('does not reload store on component changes', async() => {
   let destroyed = '';
   const simple = atom<string>();
 
-  onMount(simple, () => {
+  onMountStore(simple, () => {
     simple.set('S');
     return () => {
       destroyed += 'S';
