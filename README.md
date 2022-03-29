@@ -42,11 +42,11 @@ export const doubled = computed(bearStore, current =>
 ```
 
 ```tsx
-import { createStore } from '@nanostores/solid';
+import { useStore } from '@nanostores/solid';
 import { bearStore, increase } from './store';
 
 function BearCounter() {
-  const count = createStore(bearStore);
+  const count = useStore(bearStore);
   return <h1>{count().value} around here ...</h1>;
 }
 
