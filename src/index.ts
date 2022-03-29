@@ -20,6 +20,12 @@ function createPrimitiveStore<
   return state;
 }
 
+/**
+ * Subscribes to store changes and gets store’s value.
+ *
+ * @param store Store instance.
+ * @returns Store value.
+ */
 export function useStore<
   SomeStore extends Store,
   Value extends StoreValue<SomeStore>,
