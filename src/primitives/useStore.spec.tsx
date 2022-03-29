@@ -3,7 +3,7 @@ import { render, screen } from 'solid-testing-library';
 import userEvent from '@testing-library/user-event';
 import { expect, test } from 'vitest';
 
-import { createStore } from '../index';
+import { useStore } from '../index';
 
 const counterStore = atom({ value: 0 });
 const increase = action(counterStore, 'increase', (store) => {
@@ -18,8 +18,8 @@ const doubledCounterStore = computed(counterStore, current =>
 
 test('render correct in solid', async() => {
   const App = () => {
-    const counter = createStore(counterStore);
-    const doubled = createStore(doubledCounterStore);
+    const counter = useStore(counterStore);
+    const doubled = useStore(doubledCounterStore);
 
     return (
       <>

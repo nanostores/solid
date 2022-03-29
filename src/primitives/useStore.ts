@@ -18,7 +18,7 @@ function createPrimitiveStore<T>(store: Store<T>): Accessor<T> {
   return state;
 }
 
-export function createStore<T>(store: Store<T>): Accessor<T> {
+export function useStore<T>(store: Store<T>): Accessor<T> {
   if (isPrimitive(store.get()))
     return createPrimitiveStore(store);
 

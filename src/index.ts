@@ -1,2 +1,1 @@
-export { createStore } from './primitives/createStore';
-export { useStore } from './deprecated/useStore';
+export { useStore } from './primitives/useStore';
