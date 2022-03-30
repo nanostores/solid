@@ -96,12 +96,13 @@ export const routerStore = createRouter({
 const Home = lazy(() => import('./pages/Home'));
 const Post = lazy(() => import('./pages/Post'));
 const Comment = lazy(() => import('./pages/Comment'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 export const Router = () => {
   const page = createStore(routerStore);
 
   return (
-    <Switch fallback={<div>404 Not Found</div>}>
+    <Switch fallback={<NotFound />}>
       <Match when={page().route === 'home'}>
         <Home />
       </Match>
