@@ -84,7 +84,7 @@ const html = renderToString(<App />);
 
 ```tsx
 import { createRouter } from '@nanostores/router';
-import { createStore } from '@nanostores/solid';
+import { useStore } from '@nanostores/solid';
 import { Match, Suspense, Switch, lazy } from 'solid-js';
 
 export const routerStore = createRouter({
@@ -99,7 +99,7 @@ const Comment = lazy(() => import('./pages/Comment'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export const Router = () => {
-  const page = createStore(routerStore);
+  const page = useStore(routerStore);
 
   return (
     <Switch fallback={<NotFound />}>
