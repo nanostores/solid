@@ -80,6 +80,42 @@ await allTasks();
 const html = renderToString(<App />);
 ```
 
+## Usage with `@nanostores/router`
+
+```tsx
+import { createRouter } from '@nanostores/router';
+import { createStore } from '@nanostores/solid';
+import { Match, Suspense, Switch, lazy } from 'solid-js';
+
+export const routerStore = createRouter({
+  home: '/',
+  post: '/posts/:postId',
+  comment: '/posts/:postId/comments/:commentId',
+});
+
+const Home = lazy(() => import('./pages/Home'));
+const Post = lazy(() => import('./pages/Post'));
+const Comment = lazy(() => import('./pages/Comment'));
+
+export const Router = () => {
+  const page = createStore(routerStore);
+
+  return (
+    <Switch fallback={<div>404 Not Found</div>}>
+      <Match when={page().route === 'home'}>
+        <Home />
+      </Match>
+      <Match when={page().route === 'post'}>
+        <Post postId={page().params.postId} />
+      </Match>
+      <Match when={page().route === 'comment'}>
+        <Comment postId={page().params.postId} commentId={page().params.commentId} />
+      </Match>
+    </Switch>
+  );
+};
+```
+
 ## License
 
 MIT
