@@ -15,6 +15,8 @@ with many atomic tree-shakable stores.
 * Was designed to move logic from components to stores.
 * It has good **TypeScript** support.
 
+[Nano Stores]: https://github.com/nanostores/nanostores
+
 ## Quick start
 
 Install it:
