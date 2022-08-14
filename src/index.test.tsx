@@ -14,7 +14,7 @@ it('renders simple store', async() => {
   const events: string[] = [];
   let renders = 0;
 
-  const letterStore = atom<string>();
+  const letterStore = atom<string>('');
 
   onMountStore(letterStore, () => {
     events.push('constructor');
@@ -117,7 +117,7 @@ it('renders map store', async() => {
 
 it('does not reload store on component changes', async() => {
   let destroyed = '';
-  const simple = atom<string>();
+  const simple = atom<string>('');
 
   onMountStore(simple, () => {
     simple.set('S');

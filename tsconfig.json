@@ -10,6 +10,5 @@
     "lib": ["dom", "esnext", "dom.iterable"],
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
-  },
-  "include": ["./src"]
+  }
 }
