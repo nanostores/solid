@@ -1,6 +1,6 @@
 {
   "name": "@nanostores/solid",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Solid integration for Nano Stores, a tiny state manager with many atomic tree-shakable stores.",
   "publishConfig": {
     "directory": "package"
@@ -39,11 +39,11 @@
   },
   "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
-    "nanostores": "^0.5.10"
+    "nanostores": "^0.6.0",
+    "solid-js": ">=1.4.0"
   },
   "dependencies": {
-    "nanostores": "^0.5.12",
-    "solid-js": "^1.3.13"
+    "nanostores": "^0.6.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.18.9",
@@ -56,11 +56,13 @@
     "jsdom": "^19.0.0",
     "nanodelay": "^2.0.2",
     "rimraf": "^3.0.2",
+    "solid-js": "^1.4.8",
     "solid-testing-library": "^0.3.0",
     "tsup": "^5.12.1",
-    "typescript": "^4.5.2",
-    "vite-plugin-solid": "^2.2.6",
-    "vitest": "^0.8.0"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.7",
+    "vite-plugin-solid": "^2.3.0",
+    "vitest": "^0.8.5"
   },
   "eslintConfig": {
     "plugins": [
