@@ -10,7 +10,7 @@ specifiers:
   eslint-plugin-solid: ^0.4.5
   jsdom: ^19.0.0
   nanodelay: ^2.0.2
-  nanostores: ^0.6.0
+  nanostores: ^0.7.0
   rimraf: ^3.0.2
   solid-js: ^1.4.8
   solid-testing-library: ^0.3.0
@@ -21,7 +21,7 @@ specifiers:
   vitest: ^0.8.5
 
 dependencies:
-  nanostores: 0.6.0
+  nanostores: 0.7.0
 
 devDependencies:
   '@antfu/eslint-config-ts': 0.18.9_f662wmtjhhyn6wvwljgximehn4
@@ -3098,8 +3098,8 @@ packages:
     hasBin: true
     dev: true
 
-  /nanostores/0.6.0:
-    resolution: {integrity: sha512-CQpKE8wtaJAr66hbg32t0MOAeybzLywU6UsLAX18kyQL/bME+xwhjWpmrvJRBp5kueFy6hs2oHlt3HFpNP+JaA==}
+  /nanostores/0.7.0:
+    resolution: {integrity: sha512-y+ma9MVXuPzXKEXaRYW/iL/xG/HtMwB8fmFcMfUqt5fCNR/na2kDubbZGV4furUMTgmxfySJs0cQjORWhaPDyA==}
     engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
     dev: false
 
