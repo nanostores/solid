@@ -39,11 +39,11 @@
   },
   "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
-    "nanostores": "^0.6.0",
+    "nanostores": "^0.7.0",
     "solid-js": ">=1.4.0"
   },
   "dependencies": {
-    "nanostores": "^0.6.0"
+    "nanostores": "^0.7.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.18.9",
