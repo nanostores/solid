@@ -1,6 +1,6 @@
 {
   "name": "@nanostores/solid",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Solid integration for Nano Stores, a tiny state manager with many atomic tree-shakable stores.",
   "publishConfig": {
     "directory": "package"
