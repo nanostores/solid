@@ -16,10 +16,7 @@ export function useStore<
   const initialValue = store.get();
   const [state, setState] = createDeepSignal(initialValue);
 
-  const unsubscribe = store.subscribe((value) => {
-    const newState = reconcile(value);
-    setState(newState);
-  });
+  const unsubscribe = store.subscribe(setState);
 
   onCleanup(() => unsubscribe());
 
