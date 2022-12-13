@@ -31,25 +31,23 @@ Use it:
 // store.ts
 import { action, atom, computed } from 'nanostores';
 
-export const bearStore = atom({ value: 0 });
+export const counter = atom(0);
 
-export const increase = action(bearStore, 'increase', (store) => {
-  store.set({ value: store.get().value + 1 });
+export const increase = action(counter, 'increase', (store) => {
+  counter.set(counter.get() + 1);
 });
 
 // Use computed stores to create chains of reactive computations.
-export const doubled = computed(bearStore, current =>
-  current.count * 2,
-);
+export const doubled = computed(counter, current => current.count * 2);
 ```
 
 ```tsx
 import { useStore } from '@nanostores/solid';
-import { bearStore, increase } from './store';
+import { counter, increase } from './store';
 
-function BearCounter() {
-  const count = useStore(bearStore);
-  return <h1>{count().value} around here ...</h1>;
+function Counter() {
+  const count = useStore(counter);
+  return <h1>{count()} around here ...</h1>;
 }
 
 function Controls() {
