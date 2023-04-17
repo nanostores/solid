@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
-    "nanostores": "^0.7.0",
+    "nanostores": "^0.8.0",
     "solid-js": ">=1.4.0"
   },
   "devDependencies": {
