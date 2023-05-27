@@ -1,4 +1,4 @@
-import { STORE_UNMOUNT_DELAY, atom, map, mapTemplate, onMount as onMountStore } from 'nanostores';
+import { STORE_UNMOUNT_DELAY, atom, map, onMount as onMountStore } from 'nanostores';
 import { cleanup, render, screen } from 'solid-testing-library';
 import { afterEach, expect, it } from 'vitest';
 import { delay } from 'nanodelay';
@@ -10,7 +10,7 @@ afterEach(() => {
   cleanup();
 });
 
-it('renders simple store', async() => {
+it('renders simple store', async () => {
   const events: string[] = [];
   let renders = 0;
 
@@ -78,7 +78,7 @@ it('renders simple store', async() => {
   expect(events).toEqual(['constructor', 'destroy']);
 });
 
-it('renders map store', async() => {
+it('renders map store', async () => {
   const events: string[] = [];
   let renders = 0;
 
@@ -115,7 +115,7 @@ it('renders map store', async() => {
   expect(renders).toBe(1);
 });
 
-it('does not reload store on component changes', async() => {
+it('does not reload store on component changes', async () => {
   let destroyed = '';
   const simple = atom<string>('');
 
@@ -126,16 +126,9 @@ it('does not reload store on component changes', async() => {
     };
   });
 
-  const Map = mapTemplate<{ id: string }>((_store, id) => {
-    return () => {
-      destroyed += id;
-    };
-  });
-
   const TestA = () => {
     const simpleStore = useStore(simple);
-    const mapStore = useStore(Map('M'));
-    const text = createMemo(() => `1 ${simpleStore()} ${mapStore().id}`);
+    const text = createMemo(() => `1 ${simpleStore()}`);
     return (
       <div data-testid="test">{text()}</div>
     );
@@ -143,8 +136,7 @@ it('does not reload store on component changes', async() => {
 
   const TestB = () => {
     const simpleStore = useStore(simple);
-    const mapStore = useStore(Map('M'));
-    const text = createMemo(() => `2 ${simpleStore()} ${mapStore().id}`);
+    const text = createMemo(() => `2 ${simpleStore()}`);
     return (
       <div data-testid="test">{text()}</div>
     );
@@ -157,13 +149,13 @@ it('does not reload store on component changes', async() => {
       <Switch fallback={null}>
         <Match when={state() === 'a'}>
           <div>
-            <button onClick={() => setState('b')}></button>
+            <button onClick={() => setState('b')} />
             <TestA />
           </div>
         </Match>
         <Match when={state() === 'b'}>
           <div>
-            <button onClick={() => setState('none')}></button>
+            <button onClick={() => setState('none')} />
             <TestB />
           </div>
         </Match>
@@ -172,10 +164,10 @@ it('does not reload store on component changes', async() => {
   };
 
   render(Switcher);
-  expect(screen.getByTestId('test')).toHaveTextContent('1 S M');
+  expect(screen.getByTestId('test')).toHaveTextContent('1 S');
 
   screen.getByRole('button').click();
-  expect(screen.getByTestId('test')).toHaveTextContent('2 S M');
+  expect(screen.getByTestId('test')).toHaveTextContent('2 S');
   expect(destroyed).toBe('');
 
   screen.getByRole('button').click();
@@ -184,5 +176,5 @@ it('does not reload store on component changes', async() => {
   expect(destroyed).toBe('');
 
   await delay(STORE_UNMOUNT_DELAY);
-  expect(destroyed).toBe('SM');
+  expect(destroyed).toBe('S');
 });
