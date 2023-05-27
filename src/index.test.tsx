@@ -1,5 +1,5 @@
 import { STORE_UNMOUNT_DELAY, atom, map, onMount as onMountStore } from 'nanostores';
-import { cleanup, render, screen } from 'solid-testing-library';
+import { cleanup, render, screen } from '@solidjs/testing-library';
 import { afterEach, expect, it } from 'vitest';
 import { delay } from 'nanodelay';
 

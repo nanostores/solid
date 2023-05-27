@@ -4,6 +4,9 @@ devDependencies:
   '@antfu/eslint-config-ts':
     specifier: ^0.39.3
     version: 0.39.3(eslint@8.41.0)(typescript@5.0.4)
+  '@solidjs/testing-library':
+    specifier: ^0.7.1
+    version: 0.7.1(solid-js@1.7.5)
   '@testing-library/dom':
     specifier: ^9.3.0
     version: 9.3.0
@@ -37,9 +40,6 @@ devDependencies:
   solid-js:
     specifier: ^1.7.5
     version: 1.7.5
-  solid-testing-library:
-    specifier: ^0.5.1
-    version: 0.5.1(solid-js@1.7.5)
   tsup:
     specifier: ^6.7.0
     version: 6.7.0(typescript@5.0.4)
@@ -805,18 +805,14 @@ packages:
     dev: true
     optional: true
 
-  /@testing-library/dom@8.19.0:
-    resolution: {integrity: sha512-6YWYPPpxG3e/xOo6HIWwB/58HukkwIVTOaZ0VwdMVjhRUX/01E4FtQbck9GazOOj7MXHc5RBzMrU86iBJHbI+A==}
-    engines: {node: '>=12'}
+  /@solidjs/testing-library@0.7.1(solid-js@1.7.5):
+    resolution: {integrity: sha512-TRDsCx2R4LZYOEZ36EjmYn9O+de7o3U/D30YMlcyaagu3OlNGJubidBIdeOE5HcVIE2ojHRo6CHWdQAisUVrzg==}
+    engines: {node: '>= 14'}
+    peerDependencies:
+      solid-js: '>=1.0.0'
     dependencies:
-      '@babel/code-frame': 7.18.6
-      '@babel/runtime': 7.17.8
-      '@types/aria-query': 4.2.2
-      aria-query: 5.0.0
-      chalk: 4.1.2
-      dom-accessibility-api: 0.5.13
-      lz-string: 1.4.4
-      pretty-format: 27.5.1
+      '@testing-library/dom': 9.3.0
+      solid-js: 1.7.5
     dev: true
 
   /@testing-library/dom@9.3.0:
@@ -851,10 +847,6 @@ packages:
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
-    dev: true
-
-  /@types/aria-query@4.2.2:
-    resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
     dev: true
 
   /@types/aria-query@5.0.1:
@@ -3132,11 +3124,6 @@ packages:
     engines: {node: 14 || >=16.14}
     dev: true
 
-  /lz-string@1.4.4:
-    resolution: {integrity: sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ==}
-    hasBin: true
-    dev: true
-
   /lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -3888,17 +3875,6 @@ packages:
       '@babel/generator': 7.22.0
       '@babel/helper-module-imports': 7.18.6
       '@babel/types': 7.22.0
-      solid-js: 1.7.5
-    dev: true
-
-  /solid-testing-library@0.5.1(solid-js@1.7.5):
-    resolution: {integrity: sha512-CfcCWsI5zIJz2zcyZQz2weq+6cCS5QrcmWeEmUEy03fElJ/BV5Ly4MMTsmwdOK803zY3wJP5pPf026C40VrE1Q==}
-    engines: {node: '>= 14'}
-    deprecated: This package is now available at @solidjs/testing-library
-    peerDependencies:
-      solid-js: '>=1.0.0'
-    dependencies:
-      '@testing-library/dom': 8.19.0
       solid-js: 1.7.5
     dev: true
 
