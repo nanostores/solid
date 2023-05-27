@@ -40,7 +40,7 @@
   "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
     "nanostores": "^0.8.0",
-    "solid-js": ">=1.4.0"
+    "solid-js": ">=1.6.0"
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.39.3",
