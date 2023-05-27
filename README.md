@@ -98,7 +98,7 @@ const Post = lazy(() => import('./pages/Post'));
 const Comment = lazy(() => import('./pages/Comment'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-export const Router = () => {
+export function Router() {
   const page = useStore(routerStore);
 
   return (
@@ -114,7 +114,7 @@ export const Router = () => {
       </Match>
     </Switch>
   );
-};
+}
 ```
 
 ## License

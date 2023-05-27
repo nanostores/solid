@@ -28,7 +28,9 @@ function createDeepSignal<T>(value: T): Signal<T> {
     value,
   });
   return [
+    // eslint-disable-next-line solid/reactivity
     () => store.value,
+    // eslint-disable-next-line solid/reactivity
     (v: T) => {
       const unwrapped = unwrap(store.value);
       typeof v === 'function' && (v = v(unwrapped));

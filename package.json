@@ -6,25 +6,26 @@
   "publishConfig": {
     "directory": "package"
   },
+  "author": "Robert Soriano <sorianorobertc@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/nanostores/solid#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanostores/solid.git"
+  },
   "keywords": [
     "store",
     "state",
     "state manager",
     "solid"
   ],
-  "license": "MIT",
-  "author": "Robert Soriano <sorianorobertc@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nanostores/solid.git"
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     "require": "./dist/index.cjs",
     "import": "./dist/index.js"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -33,12 +34,11 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "release": "bumpp --commit --tag --push && pnpm publish",
-    "lint": "eslint --ext=js,ts,jsx,tsx .",
-    "lint:fix": "eslint --ext=js,ts,jsx,tsx . --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepublishOnly": "rimraf ./package && pnpm run build && clean-publish",
     "postpublish": "rimraf ./package"
   },
-  "homepage": "https://github.com/nanostores/solid#readme",
   "peerDependencies": {
     "nanostores": "^0.8.0",
     "solid-js": "^1.6.0"
