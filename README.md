@@ -38,7 +38,7 @@ export const increase = action(counter, 'increase', (store) => {
 });
 
 // Use computed stores to create chains of reactive computations.
-export const doubled = computed(counter, current => current.count * 2);
+export const doubled = computed(counter, current => current * 2);
 ```
 
 ```tsx
