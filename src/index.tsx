@@ -1,6 +1,6 @@
 import type { Store, StoreValue } from 'nanostores';
-import { createStore, reconcile, unwrap } from 'solid-js/store';
-import type { Accessor, Signal } from 'solid-js';
+import { createStore, reconcile } from 'solid-js/store';
+import type { Accessor } from 'solid-js';
 import { onCleanup } from 'solid-js';
 
 /**
@@ -13,29 +13,15 @@ export function useStore<
   SomeStore extends Store,
   Value extends StoreValue<SomeStore>,
 >(store: SomeStore): Accessor<Value> {
-  const initialValue = store.get();
-  const [state, setState] = createDeepSignal(initialValue);
+  const [state, setState] = createStore({
+    value: store.get()
+  });
 
-  const unsubscribe = store.subscribe(setState);
+  const unsubscribe = store.subscribe((newValue) => {
+    setState('value', reconcile(newValue))
+  });
 
   onCleanup(() => unsubscribe());
 
-  return state;
-}
-
-function createDeepSignal<T>(value: T): Signal<T> {
-  const [store, setStore] = createStore({
-    value,
-  });
-  return [
-    // eslint-disable-next-line solid/reactivity
-    () => store.value,
-    // eslint-disable-next-line solid/reactivity
-    (v: T) => {
-      const unwrapped = unwrap(store.value);
-      typeof v === 'function' && (v = v(unwrapped));
-      setStore('value', reconcile(v));
-      return store.value;
-    },
-  ] as Signal<T>;
+  return () => state.value;
 }
