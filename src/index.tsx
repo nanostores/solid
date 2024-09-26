@@ -13,6 +13,10 @@ export function useStore<
   SomeStore extends Store,
   Value extends StoreValue<SomeStore>,
 >(store: SomeStore): Accessor<Value> {
+  // Activate the store explicitly:
+  // https://github.com/nanostores/solid/issues/19
+  const unbindActivation = store.listen(() => { });
+
   const [state, setState] = createStore({
     value: store.get()
   });
@@ -22,6 +26,9 @@ export function useStore<
   });
 
   onCleanup(() => unsubscribe());
+
+  // Remove temporary listener now that there is already a proper subscriber.
+  unbindActivation();
 
   return () => state.value;
 }
