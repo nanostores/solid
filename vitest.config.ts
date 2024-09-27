@@ -4,9 +4,6 @@ import solid from 'vite-plugin-solid';
 export default defineConfig({
   test: {
     environment: 'jsdom',
-    deps: {
-      inline: [/solid-js/],
-    },
     setupFiles: ['./vitest.setup.ts'],
   },
   plugins: [solid()],

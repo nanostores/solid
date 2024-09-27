@@ -4,7 +4,7 @@ import { afterEach, expect, it } from 'vitest'
 import { delay } from 'nanodelay'
 
 import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
-import { useStore } from '.'
+import { useStore } from './'
 
 afterEach(() => {
   cleanup()

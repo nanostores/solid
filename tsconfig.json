@@ -14,10 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "noUncheckedIndexedAccess": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "types": ["vite/client", "@testing-library/jest-dom"],
-    "baseUrl": "."
+    "jsxImportSource": "solid-js"
   },
-  "include": ["./vitest.setup.ts"],
   "exclude": ["node_modules", "dist", "./package"]
 }
