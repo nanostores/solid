@@ -2,6 +2,7 @@
   "name": "@nanostores/solid",
   "type": "module",
   "version": "0.4.2",
+  "packageManager": "pnpm@9.11.0",
   "description": "Solid integration for Nano Stores, a tiny state manager with many atomic tree-shakable stores.",
   "author": "Robert Soriano <sorianorobertc@gmail.com>",
   "license": "MIT",
