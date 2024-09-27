@@ -19,7 +19,7 @@ with many atomic tree-shakable stores.
 Install it:
 
 ```bash
-npm install nanostores @nanostores/solid # or npm or yarn
+npm install nanostores @nanostores/solid
 ```
 
 ## Usage:
