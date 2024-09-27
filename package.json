@@ -3,9 +3,6 @@
   "type": "module",
   "version": "0.4.2",
   "description": "Solid integration for Nano Stores, a tiny state manager with many atomic tree-shakable stores.",
-  "publishConfig": {
-    "directory": "package"
-  },
   "author": "Robert Soriano <sorianorobertc@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/nanostores/solid#readme",
@@ -39,9 +36,8 @@
     "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "rimraf ./package && pnpm run build && clean-publish",
-    "postpublish": "rimraf ./package",
+    "release": "bumpp",
+    "prepublishOnly": "pnpm build",
     "format": "prettier --ignore-path .gitignore -w \"src/**/*.{js,ts,json,css,tsx,jsx}\"",
     "lint": "concurrently pnpm:lint:*",
     "lint:code": "eslint --ignore-path .gitignore --max-warnings 0 src/**/*.{ts,tsx}",
@@ -56,8 +52,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
     "@typescript-eslint/parser": "^7.9.0",
-    "bumpp": "^9.1.0",
-    "clean-publish": "^4.2.0",
+    "bumpp": "^9.5.2",
     "concurrently": "^9.0.1",
     "eslint": "^8.56.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -72,9 +67,5 @@
     "typescript": "^5.4.5",
     "vite-plugin-solid": "^2.10.2",
     "vitest": "^2.1.1"
-  },
-  "clean-publish": {
-    "withoutPublish": true,
-    "tempDir": "package"
   }
 }
