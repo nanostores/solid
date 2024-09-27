@@ -1,7 +1,7 @@
-import type { Store, StoreValue } from 'nanostores';
-import { createStore, reconcile } from 'solid-js/store';
-import type { Accessor } from 'solid-js';
-import { onCleanup } from 'solid-js';
+import type { Store, StoreValue } from 'nanostores'
+import { createStore, reconcile } from 'solid-js/store'
+import type { Accessor } from 'solid-js'
+import { onCleanup } from 'solid-js'
 
 /**
  * Subscribes to store changes and gets store’s value.
@@ -9,26 +9,25 @@ import { onCleanup } from 'solid-js';
  * @param store Store instance.
  * @returns Store value.
  */
-export function useStore<
-  SomeStore extends Store,
-  Value extends StoreValue<SomeStore>,
->(store: SomeStore): Accessor<Value> {
+export function useStore<SomeStore extends Store, Value extends StoreValue<SomeStore>>(
+  store: SomeStore,
+): Accessor<Value> {
   // Activate the store explicitly:
   // https://github.com/nanostores/solid/issues/19
-  const unbindActivation = store.listen(() => { });
+  const unbindActivation = store.listen(() => {})
 
   const [state, setState] = createStore({
-    value: store.get()
-  });
+    value: store.get(),
+  })
 
-  const unsubscribe = store.subscribe((newValue) => {
+  const unsubscribe = store.subscribe(newValue => {
     setState('value', reconcile(newValue))
-  });
+  })
 
-  onCleanup(() => unsubscribe());
+  onCleanup(() => unsubscribe())
 
   // Remove temporary listener now that there is already a proper subscriber.
-  unbindActivation();
+  unbindActivation()
 
-  return () => state.value;
+  return () => state.value
 }
