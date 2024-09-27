@@ -16,8 +16,6 @@ with many atomic tree-shakable stores.
 
 ## Installation
 
-Install it:
-
 ```bash
 npm install nanostores @nanostores/solid
 ```
