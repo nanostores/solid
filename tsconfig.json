@@ -15,8 +15,9 @@
     "noUncheckedIndexedAccess": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": [],
+    "types": ["vite/client", "@testing-library/jest-dom"],
     "baseUrl": "."
   },
+  "include": ["./vitest.setup.ts"],
   "exclude": ["node_modules", "dist", "./package"]
 }
