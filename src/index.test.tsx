@@ -1,47 +1,43 @@
-import { STORE_UNMOUNT_DELAY, atom, map, onMount as onMountStore } from 'nanostores';
-import { cleanup, render, screen } from '@solidjs/testing-library';
-import { afterEach, expect, it } from 'vitest';
-import { delay } from 'nanodelay';
+import { STORE_UNMOUNT_DELAY, atom, map, onMount as onMountStore } from 'nanostores'
+import { cleanup, render, screen } from '@solidjs/testing-library'
+import { afterEach, expect, it } from 'vitest'
+import { delay } from 'nanodelay'
 
-import { Match, Show, Switch, createMemo, createSignal } from 'solid-js';
-import { useStore } from '.';
+import { Match, Show, Switch, createMemo, createSignal } from 'solid-js'
+import { useStore } from './'
 
 afterEach(() => {
-  cleanup();
-});
+  cleanup()
+})
 
 it('renders simple store', async () => {
-  const events: string[] = [];
-  let renders = 0;
+  const events: string[] = []
+  let renders = 0
 
-  const letterStore = atom<string>('');
+  const letterStore = atom<string>('')
 
   onMountStore(letterStore, () => {
-    events.push('constructor');
-    letterStore.set('a');
+    events.push('constructor')
+    letterStore.set('a')
     return () => {
-      events.push('destroy');
-    };
-  });
+      events.push('destroy')
+    }
+  })
 
   const Test1 = () => {
-    const store = useStore(letterStore);
-    renders += 1;
-    return (
-      <div data-testid="test1">{store()}</div>
-    );
-  };
+    const store = useStore(letterStore)
+    renders += 1
+    return <div data-testid="test1">{store()}</div>
+  }
 
   const Test2 = () => {
-    const store = useStore(letterStore);
+    const store = useStore(letterStore)
 
-    return (
-      <div data-testid="test2">{store()}</div>
-    );
-  };
+    return <div data-testid="test2">{store()}</div>
+  }
 
   const Wrapper = () => {
-    const [show, setShow] = createSignal(true);
+    const [show, setShow] = createSignal(true)
 
     return (
       <div>
@@ -53,97 +49,95 @@ it('renders simple store', async () => {
           <Test2 />
         </Show>
       </div>
-    );
-  };
+    )
+  }
 
-  render(() => <Wrapper />);
-  expect(events).toEqual(['constructor']);
-  expect(screen.getByTestId('test1')).toHaveTextContent('a');
-  expect(screen.getByTestId('test2')).toHaveTextContent('a');
-  expect(renders).toBe(1);
+  render(() => <Wrapper />)
+  expect(events).toEqual(['constructor'])
+  expect(screen.getByTestId('test1')).toHaveTextContent('a')
+  expect(screen.getByTestId('test2')).toHaveTextContent('a')
+  expect(renders).toBe(1)
 
-  letterStore.set('b');
-  letterStore.set('c');
+  letterStore.set('b')
+  letterStore.set('c')
 
-  expect(screen.getByTestId('test1')).toHaveTextContent('c');
-  expect(screen.getByTestId('test2')).toHaveTextContent('c');
-  expect(renders).toBe(1);
+  expect(screen.getByTestId('test1')).toHaveTextContent('c')
+  expect(screen.getByTestId('test2')).toHaveTextContent('c')
+  expect(renders).toBe(1)
 
-  screen.getByRole('button').click();
+  screen.getByRole('button').click()
 
-  expect(screen.queryByTestId('test')).not.toBeInTheDocument();
-  expect(renders).toBe(1);
-  await delay(STORE_UNMOUNT_DELAY);
+  expect(screen.queryByTestId('test')).not.toBeInTheDocument()
+  expect(renders).toBe(1)
+  await delay(STORE_UNMOUNT_DELAY)
 
-  expect(events).toEqual(['constructor', 'destroy']);
-});
+  expect(events).toEqual(['constructor', 'destroy'])
+})
 
 it('renders map store', async () => {
-  const events: string[] = [];
-  let renders = 0;
+  const events: string[] = []
+  let renders = 0
 
-  const nameStore = map<{ first: string; last: string }>();
+  const nameStore = map<{ first: string; last: string }>()
 
   onMountStore(nameStore, () => {
-    events.push('constructor');
-    nameStore.setKey('first', 'Aleister');
-    nameStore.setKey('last', 'Crowley');
+    events.push('constructor')
+    nameStore.setKey('first', 'Aleister')
+    nameStore.setKey('last', 'Crowley')
     return () => {
-      events.push('destroy');
-    };
-  });
+      events.push('destroy')
+    }
+  })
 
   const Wrapper = () => {
-    const store = useStore(nameStore);
+    const store = useStore(nameStore)
 
-    renders += 1;
+    renders += 1
 
     return (
-      <div data-testid="test">{store().first} {store().last}</div>
-    );
-  };
+      <div data-testid="test">
+        {store().first} {store().last}
+      </div>
+    )
+  }
 
-  render(Wrapper);
-  expect(events).toEqual(['constructor']);
-  expect(screen.getByTestId('test')).toHaveTextContent('Aleister Crowley');
-  expect(renders).toBe(1);
+  render(Wrapper)
+  expect(events).toEqual(['constructor'])
+  expect(screen.getByTestId('test')).toHaveTextContent('Aleister Crowley')
+  expect(renders).toBe(1)
 
-  nameStore.setKey('first', 'Anton');
-  nameStore.setKey('last', 'Lavey');
+  nameStore.setKey('first', 'Anton')
+  nameStore.setKey('last', 'Lavey')
 
-  expect(screen.getByTestId('test')).toHaveTextContent('Anton Lavey');
-  expect(renders).toBe(1);
-});
+  expect(screen.getByTestId('test')).toHaveTextContent('Anton Lavey')
+  expect(renders).toBe(1)
+})
 
 it('does not reload store on component changes', async () => {
-  let destroyed = '';
-  const simple = atom<string>('');
+  let destroyed = ''
+  const simple = atom<string>('')
 
   onMountStore(simple, () => {
-    simple.set('S');
+    simple.set('S')
     return () => {
-      destroyed += 'S';
-    };
-  });
+      destroyed += 'S'
+    }
+  })
 
   const TestA = () => {
-    const simpleStore = useStore(simple);
-    const text = createMemo(() => `1 ${simpleStore()}`);
-    return (
-      <div data-testid="test">{text()}</div>
-    );
-  };
+    const simpleStore = useStore(simple)
+    const text = createMemo(() => `1 ${simpleStore()}`)
+    return <div data-testid="test">{text()}</div>
+  }
 
   const TestB = () => {
-    const simpleStore = useStore(simple);
-    const text = createMemo(() => `2 ${simpleStore()}`);
-    return (
-      <div data-testid="test">{text()}</div>
-    );
-  };
+    const simpleStore = useStore(simple)
+    const text = createMemo(() => `2 ${simpleStore()}`)
+    return <div data-testid="test">{text()}</div>
+  }
 
   const Switcher = () => {
-    const [state, setState] = createSignal('a');
+    const [state, setState] = createSignal('a')
 
     return (
       <Switch fallback={null}>
@@ -160,21 +154,21 @@ it('does not reload store on component changes', async () => {
           </div>
         </Match>
       </Switch>
-    );
-  };
+    )
+  }
 
-  render(Switcher);
-  expect(screen.getByTestId('test')).toHaveTextContent('1 S');
+  render(Switcher)
+  expect(screen.getByTestId('test')).toHaveTextContent('1 S')
 
-  screen.getByRole('button').click();
-  expect(screen.getByTestId('test')).toHaveTextContent('2 S');
-  expect(destroyed).toBe('');
+  screen.getByRole('button').click()
+  expect(screen.getByTestId('test')).toHaveTextContent('2 S')
+  expect(destroyed).toBe('')
 
-  screen.getByRole('button').click();
+  screen.getByRole('button').click()
 
-  expect(screen.queryByTestId('test')).not.toBeInTheDocument();
-  expect(destroyed).toBe('');
+  expect(screen.queryByTestId('test')).not.toBeInTheDocument()
+  expect(destroyed).toBe('')
 
-  await delay(STORE_UNMOUNT_DELAY);
-  expect(destroyed).toBe('S');
-});
+  await delay(STORE_UNMOUNT_DELAY)
+  expect(destroyed).toBe('S')
+})
