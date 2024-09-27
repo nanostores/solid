@@ -37,7 +37,7 @@
     "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "release": "bumpp",
+    "release": "bumpp --commit --tag --push",
     "prepublishOnly": "pnpm build",
     "format": "prettier --ignore-path .gitignore -w \"src/**/*.{js,ts,json,css,tsx,jsx}\"",
     "lint": "concurrently pnpm:lint:*",
