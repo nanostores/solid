@@ -26,21 +26,21 @@ npm install nanostores @nanostores/solid
 
 ```ts
 // store.ts
-import { action, atom } from 'nanostores';
+import { atom } from 'nanostores';
 
-export const counter = atom(0);
+export const $counter = atom(0);
 
-export const increase = action(counter, 'increase', (store) => {
-  counter.set(counter.get() + 1);
-});
+export const increase = () => {
+  $counter.set($counter.get() + 1);
+}
 ```
 
 ```tsx
 import { useStore } from '@nanostores/solid';
-import { counter, increase } from './store';
+import { $counter, increase } from './store';
 
 function Counter() {
-  const count = useStore(counter);
+  const count = useStore($counter);
   return <h1>{count()} around here ...</h1>;
 }
 
