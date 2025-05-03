@@ -45,7 +45,7 @@
     "lint:types": "tsc --noEmit"
   },
   "peerDependencies": {
-    "nanostores": "^0.9.0 || ^0.10.0 || ^0.11.0",
+    "nanostores": ">=0.9.0 <2.0.0",
     "solid-js": "^1.6.0"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "eslint-plugin-no-only-tests": "^3.1.0",
     "jsdom": "^22.0.0",
     "nanodelay": "^2.0.2",
-    "nanostores": "^0.11.3",
+    "nanostores": "^1.0.1",
     "prettier": "3.0.0",
     "solid-js": "^1.9.1",
     "tsup": "^8.0.2",
