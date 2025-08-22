@@ -25,7 +25,7 @@ export function useStore<SomeStore extends Store, Value extends StoreValue<SomeS
 
   const unsubscribe = store.subscribe(newValue => {
     // Specify the key for reconciliation to match items in array store.
-    setState('value', reconcile(newValue, { key: options.key }))
+    setState('value', reconcile(newValue, options))
   })
 
   onCleanup(() => unsubscribe())
