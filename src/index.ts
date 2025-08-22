@@ -11,6 +11,7 @@ import { onCleanup } from 'solid-js'
  */
 export function useStore<SomeStore extends Store, Value extends StoreValue<SomeStore>>(
   store: SomeStore,
+  options: { key?: string | null } = {},
 ): Accessor<Value> {
   // Activate the store explicitly:
   // https://github.com/nanostores/solid/issues/19
@@ -21,7 +22,8 @@ export function useStore<SomeStore extends Store, Value extends StoreValue<SomeS
   })
 
   const unsubscribe = store.subscribe(newValue => {
-    setState('value', reconcile(newValue))
+    // Specify the key for reconciliation to match items in array store.
+    setState('value', reconcile(newValue, { key: options.key }))
   })
 
   onCleanup(() => unsubscribe())
