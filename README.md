@@ -49,6 +49,39 @@ function Controls() {
 }
 ```
 
+## Object values are reconciled in place
+
+For object and array values, `useStore` applies updates with Solid’s
+[`reconcile()`] to keep rendering fine-grained: instead of replacing
+the value, the previous object is **mutated in place** to match the new one.
+The second argument of `useStore` is passed through as [`ReconcileOptions`]
+(for example `key`, used to match items in array stores).
+
+This has one important consequence: if you `set()` a reference to an object
+you don’t own — like a proxy from another library — the previous stored
+object can be mutated to look like the new value. To avoid this footgun,
+store plain copies rather than external references:
+
+```ts
+/**
+ * Deep copy helper to remove proxies before storing a value.
+ */
+function unproxify<Value>(value: Value): Value {
+  if (Array.isArray(value)) return value.map(unproxify) as Value;
+  if (typeof value === 'object' && value !== null) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entry]) => [key, unproxify(entry)])
+    ) as Value;
+  }
+  return value;
+}
+
+$store.set(unproxify(nextValue));
+```
+
+[`reconcile()`]: https://docs.solidjs.com/reference/store-utilities/reconcile
+[`ReconcileOptions`]: https://docs.solidjs.com/reference/store-utilities/reconcile
+
 ## License
 
 MIT
